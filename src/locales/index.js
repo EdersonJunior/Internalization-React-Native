@@ -14,10 +14,22 @@ const normalizeTranslate = {
   // 'pt_US': 'pt_BR',
 }
 
+// const getLanguageByDevice = () => {
+//   return Platform.OS === 'ios' || Platform.PlatformWebStatic === 'web'
+//     ? NativeModules.SettingsManager.settings.AppleLocale
+//     : NativeModules.I18nManager.localeIdentifier
+// }
 const getLanguageByDevice = () => {
-  return Platform.OS === 'ios'
-    ? NativeModules.SettingsManager.settings.AppleLocale
-    : NativeModules.I18nManager.localeIdentifier
+  if (Platform.OS === 'ios') {
+    return NativeModules.SettingsManager.settings.AppleLocale
+  
+  } else if (Platform.OS === 'android') {
+    return NativeModules.I18nManager.localeIdentifier
+  
+  } else {
+    return navigator.language.replace("-", "_")
+  }
+
 }
 
 I18n.fallback = true
