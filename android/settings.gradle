@@ -1,0 +1,3 @@
+rootProject.name = 'internalization'
+
+include ':app'
